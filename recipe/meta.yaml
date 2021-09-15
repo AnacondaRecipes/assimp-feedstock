@@ -16,6 +16,7 @@ source:
 
 build:
   number: 6
+  skip: True  # [linux-s390x]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
