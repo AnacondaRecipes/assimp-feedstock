@@ -16,6 +16,7 @@ source:
 
 build:
   number: 6
+  skip: True  # [s390x]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
 
@@ -24,7 +25,9 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ compiler('c') }}
     - cmake
-    - make
+    - make  # [unix]
+    - patch  # [unix]
+    - m2-patch  # [win]
   host:
     - boost-cpp
     - zlib
