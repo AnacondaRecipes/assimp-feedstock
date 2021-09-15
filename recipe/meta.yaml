@@ -25,6 +25,7 @@ requirements:
     - {{ compiler('c') }}
     - cmake
     - make  # [unix]
+    - patch  # [unix]
   host:
     - boost-cpp
     - zlib
