@@ -1,6 +1,5 @@
 {% set name = "assimp" %}
 {% set version = "5.0.1" %}
-{% set sha256 = "f148ba31dc1e7e00e59cc09b25535af997dc1998" %}
 
 package:
   name: {{ name }}
@@ -8,14 +7,14 @@ package:
 
 source:
   url: https://github.com/assimp/assimp/archive/v{{ version }}.tar.gz
-  sha1: {{ sha256 }}
+  sha1: f148ba31dc1e7e00e59cc09b25535af997dc1998
   patches:
     - patch.diff  # [linux]
     - fix_cmake_config.diff
     - do_not_export_debug_symbols_gcc.patch
 
 build:
-  number: 6
+  number: 7
   skip: True  # [s390x]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x') }}
@@ -29,7 +28,7 @@ requirements:
     - patch  # [unix]
     - m2-patch  # [win]
   host:
-    - boost-cpp
+    - boost-cpp {{ boost_cpp }}
     - zlib
   run:
     - boost-cpp
@@ -46,7 +45,12 @@ test:
 about:
   home: https://assimp.org/
   summary: A library to import and export various 3d-model-formats including scene-post-processing to generate missing render data.
-  license: Modified BSD
+  description: |
+    Open Asset Import Library is a library to load various 3d file formats into a shared, in-memory format. 
+    It supports more than 40 file formats for import and a growing selection of file formats for export.
+  dev_url: https://github.com/assimp/assimp
+  doc_url: https://assimp-docs.readthedocs.io/
+  license: BSD-3-Clause-Modification
   license_family: BSD
   license_file: LICENSE
 
