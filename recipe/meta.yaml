@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/assimp/assimp/archive/v{{ version }}.tar.gz
-  sha1: f148ba31dc1e7e00e59cc09b25535af997dc1998
+  sha256: 11310ec1f2ad2cd46b95ba88faca8f7aaa1efe9aa12605c55e3de2b977b3dbfc
   patches:
     - patch.diff  # [linux]
     - fix_cmake_config.diff
@@ -50,7 +50,7 @@ about:
     It supports more than 40 file formats for import and a growing selection of file formats for export.
   dev_url: https://github.com/assimp/assimp
   doc_url: https://assimp-docs.readthedocs.io/
-  license: BSD-3-Clause-Modification
+  license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
 
