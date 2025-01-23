@@ -1,23 +1,19 @@
 {% set name = "assimp" %}
-{% set version = "5.0.1" %}
+{% set version = "5.4.3" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/assimp/assimp/archive/v{{ version }}.tar.gz
-  sha256: 11310ec1f2ad2cd46b95ba88faca8f7aaa1efe9aa12605c55e3de2b977b3dbfc
-  patches:
-    - patch.diff  # [linux]
-    - fix_cmake_config.diff
-    - do_not_export_debug_symbols_gcc.patch
+  url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
+  sha256: 66dfbaee288f2bc43172440a55d0235dfc7bf885dda6435c038e8000e79582cb
 
 build:
-  number: 7
+  number: 0
   skip: True  # [s390x]
   run_exports:
-    - {{ pin_subpackage(name, max_pin='x.x') }}
+    - {{ pin_subpackage(name, max_pin='x.x.x') }}
 
 requirements:
   build:
@@ -25,28 +21,35 @@ requirements:
     - {{ compiler('c') }}
     - cmake
     - make  # [unix]
-    - patch  # [unix]
-    - m2-patch  # [win]
   host:
-    - boost-cpp 1.82
-    - zlib
+    - boost-cpp {{ boost_cpp }}
+    - zlib {{ zlib }}
   run:
     - boost-cpp
     - zlib
 
 test:
+  requires:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - ninja
+    - cmake
+  files:
+    - test
   commands:
-    - test -f $PREFIX/include/assimp/anim.h  # [unix]
-    - test -f $PREFIX/lib/libassimp${SHLIB_EXT}  # [unix]
-    - if exist %LIBRARY_PREFIX%\include\assimp\anim.h (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\lib\assimp-vc140-mt.lib (exit 0) else (exit 1)  # [win]
-    - if exist %LIBRARY_PREFIX%\bin\assimp-vc140-mt.dll (exit 0) else (exit 1)  # [win]
+    - test -f $PREFIX/include/assimp/anim.h                         # [unix]
+    - test -f $PREFIX/lib/libassimp${SHLIB_EXT}                     # [unix]
+    - test -f $PREFIX/lib/pkgconfig/assimp.pc                       # [unix]
+    - if not exist %LIBRARY_PREFIX%\include\assimp\anim.h exit 1    # [win]
+    - if not exist %LIBRARY_PREFIX%\lib\assimp.lib exit 1           # [win]
+    - if not exist %LIBRARY_PREFIX%\bin\assimp.dll exit 1           # [win]
+    - if not exist %LIBRARY_PREFIX%\lib\pkgconfig\assimp.pc exit 1  # [win]
 
 about:
   home: https://assimp.org/
   summary: A library to import and export various 3d-model-formats including scene-post-processing to generate missing render data.
   description: |
-    Open Asset Import Library is a library to load various 3d file formats into a shared, in-memory format. 
+    Open Asset Import Library is a library that loads various 3D file formats into a shared, in-memory format.
     It supports more than 40 file formats for import and a growing selection of file formats for export.
   dev_url: https://github.com/assimp/assimp
   doc_url: https://assimp-docs.readthedocs.io/
