@@ -36,14 +36,7 @@ test:
     - cmake
   files:
     - test
-  commands:
-    - test -f $PREFIX/include/assimp/anim.h                         # [unix]
-    - test -f $PREFIX/lib/libassimp${SHLIB_EXT}                     # [unix]
-    - test -f $PREFIX/lib/pkgconfig/assimp.pc                       # [unix]
-    - if not exist %LIBRARY_PREFIX%\include\assimp\anim.h exit 1    # [win]
-    - if not exist %LIBRARY_PREFIX%\lib\assimp.lib exit 1           # [win]
-    - if not exist %LIBRARY_PREFIX%\bin\assimp.dll exit 1           # [win]
-    - if not exist %LIBRARY_PREFIX%\lib\pkgconfig\assimp.pc exit 1  # [win]
+  # The test commands are moved into run_test.bat and run_test.sh
 
 about:
   home: https://assimp.org/

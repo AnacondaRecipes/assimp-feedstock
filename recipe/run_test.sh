@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+test -f $PREFIX/include/assimp/anim.h
+test -f $PREFIX/lib/libassimp${SHLIB_EXT}
+test -f $PREFIX/lib/pkgconfig/assimp.pc
+
 # Test linking against the assimp library
 cd test
 
