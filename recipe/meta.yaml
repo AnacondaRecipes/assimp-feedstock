@@ -22,10 +22,8 @@ requirements:
     - cmake
     - make  # [unix]
   host:
-    - boost-cpp {{ boost_cpp }}
     - zlib {{ zlib }}
   run:
-    - boost-cpp
     - zlib
 
 test:
