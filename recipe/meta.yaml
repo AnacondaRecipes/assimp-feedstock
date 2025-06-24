@@ -1,5 +1,5 @@
 {% set name = "assimp" %}
-{% set version = "5.4.3" %}
+{% set version = "6.0.2" %}
 
 package:
   name: {{ name }}
@@ -7,11 +7,10 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/v{{ version }}.tar.gz
-  sha256: 66dfbaee288f2bc43172440a55d0235dfc7bf885dda6435c038e8000e79582cb
+  sha256: d1822d9a19c9205d6e8bc533bf897174ddb360ce504680f294170cc1d6319751
 
 build:
   number: 0
-  skip: True  # [s390x]
   run_exports:
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
 
