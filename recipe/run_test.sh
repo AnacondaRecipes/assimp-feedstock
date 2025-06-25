@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+# Additional test on top of upstream tests
+
 test -f $PREFIX/include/assimp/anim.h
 test -f $PREFIX/lib/libassimp${SHLIB_EXT}
 test -f $PREFIX/lib/pkgconfig/assimp.pc
