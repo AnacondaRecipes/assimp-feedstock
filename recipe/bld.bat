@@ -21,8 +21,8 @@ cmake .. ^
 if errorlevel 1 exit 1
 
 :: Run upstream tests as part of the build due to tests being tightly coupled to the main
-:: library code and build process 
-bin/Release/unit.exe
+:: library code and build process.
+bin/Debug/unit.exe
 if errorlevel 1 exit 1
 
 nmake
